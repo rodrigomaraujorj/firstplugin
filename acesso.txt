@@ -1,0 +1,79 @@
+ssh modev@34.201.73.98
+pass: Modev@2019
+
+cd webapps/moodle-dev/moodle
+php admin/cli/purge_caches.php
+
+https://modev.timasters.com.br/admin/purgecaches.php
+
+http://phpmyadmin.d51lfg9cks-xmz4qmwq862o.p.temp-site.link/i
+
+-- Consulta de IDs - Completos
+SELECT dr.id, SUBSTR(turma.name,2 ,16) , dr.shortname, dr.fullname, CONCAT('https://lms.infnet.edu.br/moodle/course/view.php?id=', dr.id) Link, av.id id_ao_vivo, cm.id id_pagina_gravacao
+FROM mdl_course dr
+JOIN mdl_course_categories bloco ON dr.category = bloco.id
+JOIN mdl_course_categories turma ON bloco.parent = turma.id
+JOIN mdl_label l ON dr.id = l.course
+JOIN mdl_url u ON dr.id = u.course
+JOIN mdl_page p ON dr.id = p.course
+JOIN mdl_course_modules av ON u.id=av.instance
+JOIN mdl_course_modules cm ON p.id=cm.instance
+WHERE (bloco.name LIKE '%23E2%' OR dr.fullname LIKE '%23E2%') AND l.name LIKE 'Aulas ao vivo e suas gravações' AND (u.name LIKE 'Assista aqui as aulas ao vivo:%' AND av.course = u.course ) AND (p.name LIKE 'Assista aqui as aulas gravadas' AND cm.course = p.course)  
+ORDER BY dr.id ASC
+
+
+  [45]=>
+  object(stdClass)#210 (26) {
+    ["id"]=>
+    string(2) "52"
+    ["course"]=>
+    string(1) "3"
+    ["module"]=>
+    string(2) "17"
+    ["instance"]=>
+    string(2) "11"
+    ["section"]=>
+    string(2) "13"
+    ["idnumber"]=>
+    string(0) ""
+    ["added"]=>
+    string(10) "1516730513"
+    ["score"]=>
+    string(1) "0"
+    ["indent"]=>
+    string(1) "1"
+    ["visible"]=>
+    string(1) "1"
+    ["visibleoncoursepage"]=>
+    string(1) "1"
+    ["visibleold"]=>
+    string(1) "1"
+    ["groupmode"]=>
+    string(1) "0"
+    ["groupingid"]=>
+    string(1) "0"
+    ["completion"]=>
+    string(1) "0"
+    ["completiongradeitemnumber"]=>
+    NULL
+    ["completionview"]=>
+    string(1) "0"
+    ["completionexpected"]=>
+    string(1) "0"
+    ["completionpassgrade"]=>
+    string(1) "0"
+    ["showdescription"]=>
+    string(1) "0"
+    ["availability"]=>
+    NULL
+    ["deletioninprogress"]=>
+    string(1) "0"
+    ["downloadcontent"]=>
+    string(1) "1"
+    ["lang"]=>
+    NULL
+    ["name"]=>
+    string(30) "Assista aqui as aulas gravadas"
+    ["modname"]=>
+    string(4) "page"
+  }
